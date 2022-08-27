@@ -19,3 +19,10 @@ Useage:
       state = videoPlayerState,
   )
 ```
+
+Preview:
+
+[![Screenshot](composeVideoPlayer1.png)](https://youtu.be/kAugr_j2wBE)
+
+https://youtu.be/kAugr_j2wBE
+
