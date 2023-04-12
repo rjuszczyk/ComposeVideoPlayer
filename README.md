@@ -6,18 +6,30 @@ This approach uses VLCJ Direct Rendering (https://capricasoftware.co.uk/projects
 Useage:
 
 ```
- val videoPlayerState = rememberVideoPlayerState(
-      time = 0L,
-      isPlaying = false,
-  )
-  val time by videoPlayerState.time.collectAsState()
-  val isPlaying by videoPlayerState.isPlaying.collectAsState()
-  val length by videoPlayerState.length.collectAsState()
+    val videoPlayerState = rememberVideoPlayerState()
+    VideoPlayer(
+        mrl = "/Users/r.juszczyk/Movies/seaplane.mp4",
+        state = videoPlayerState,
+    )
 
-  VideoPlayer(
-      mrl = "/Users/r.juszczyk/Movies/seaplane.mp4",
-      state = videoPlayerState,
-  )
+    LaunchedEffect(videoFile) {
+        videoPlayerState.doWithMediaPlayer { mediaPlayer ->
+            mediaPlayer.addOnTimeChangedListener(
+                object : OnTimeChangedListener {
+                    override fun onTimeChanged(timeMillis: Long) {
+                    }
+                }
+            )
+        }
+    }
+
+    Button(
+        onClick = {
+            videoPlayerState.doWithMediaPlayer { mediaPlayer -> mediaPlayer.pause() }
+        }
+    ) {
+        Text("Pause")
+    }
 ```
 
 Preview:
